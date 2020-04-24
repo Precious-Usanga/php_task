@@ -20,6 +20,6 @@
         </li>
     </ul>
 
-    <p>Forgot Password</p>
+    <p>WELCOME!!</p>
 </body>
 </html>
