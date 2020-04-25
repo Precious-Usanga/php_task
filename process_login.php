@@ -26,7 +26,7 @@
     }
 
     if (!empty($error)) {
-        $_SESSION['error'] = $error;
+        $_SESSION['login_error'] = $error;
         $_SESSION['formData'] = $data;
         header("Location: login.php");
     } else {
@@ -38,7 +38,9 @@
                 $userData = json_decode($userFile);
                 $verifypassword = password_verify($formData['password'], $userData->password);
                 if($verifypassword == true) {
-                    $_SESSION['success'] = "Logged in successfully";
+                    $_SESSION['success'] = "Hello ".$userData->first_name." ".$userData->last_name." You're Logged in successfully";
+                    $_SESSION['loggedIn'] = $userData; 
+                    // if($userData->designation)
                     header("Location: dashboard.php");
                     die();
                 } else {

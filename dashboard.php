@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,18 +10,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
+
+    <?php if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {?>
+        <div class="alert alert-success" role="alert">
+            <?php 
+                echo $_SESSION['success']; 
+            ?>
+        </div>
+    <?php } ?>
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a class="nav-link active" href="register.php">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="login.php">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="forgot_password.php">Forgot password</a>
+            <a class="nav-link active" href="logout.php">Logout</a>
         </li>
     </ul>
-
-    <p>WELCOME!!</p>
 </body>
 </html>

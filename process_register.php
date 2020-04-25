@@ -74,7 +74,7 @@
     }
 
     if (!empty($error)) {
-        $_SESSION['error'] = $error;
+        $_SESSION['register_error'] = $error;
         $_SESSION['formData'] = $data;
         header("Location: register.php");
     } else {
