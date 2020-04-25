@@ -1,39 +1,44 @@
 <?php  session_start();
-    $error_count = 0;
+    $error = [];
     $data = $_POST;
-    $email = $data['email'] != "" ? $data['email'] : $error_count++;
-    $password = $data['password'] != "" ? $data['password'] : $error_count++;
+    $formData = [];
 
-    // $first_name = $_POST['first_name'] ? "first_name canot be empty" : " ";
-    if ($error_count > 0) {
-        $_SESSION['error'] = "You have " . $error_count . " error(s) on your form";
+    if($data){
+        if(!isset($data['email']) || $data['email'] === ""){
+            $email_error = 'Please Enter Email';
+            $error['email_error'] = $email_error;
+        } elseif(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+            $email_error = 'Enter valid Email';
+            $error['email_error'] = $email_error;
+        } elseif(strlen($data['email']) < 5) {
+            $email_error = 'Email cannot be less than 5 letters';
+            $error['email_error'] = $email_error;
+        }  else {
+            $formData['email']  = $data['email'];
+        }
+    
+        if(!isset($data['password']) || $data['password'] === ""){
+            $password_error = 'Password cannot be empty';
+            $error['password_error'] = $password_error;
+        } else {
+            $formData['password']  = $data['password'];
+        }
+    }
+
+    if (!empty($error)) {
+        $_SESSION['error'] = $error;
         $_SESSION['formData'] = $data;
         header("Location: login.php");
     } else {
         $all_users = scandir('db/users');
-        // print_r($all_users);
-        // $new_user_id = count($all_users) - 2;
-        // $user = $all_users.filter(function($u){
-        //     if($u == $data['email'].'.json'){
-        //         print_r($user);
-        //         return $user;
-        //     }
-        // });
-
-        // $ufile = $all_users.search($data['email'].'.json');
-        // print_r($uFile); exit;
-
 
         for($i = 0; $i < count($all_users); $i++){
-            if($data['email'].'.json' == $all_users[$i]){
-                // print_r($all_users[$i]);
-                // $userFile = $all_users[$i];
+            if($formData['email'].'.json' == $all_users[$i]){
                 $userFile = file_get_contents('db/users/'.$all_users[$i]);
                 $userData = json_decode($userFile);
-                // print_r($userData);
-                $verifypassword = password_verify($data['password'], $userData->password);
+                $verifypassword = password_verify($formData['password'], $userData->password);
                 if($verifypassword == true) {
-                    $_SESSION['success'] = "logged in successfully";
+                    $_SESSION['success'] = "Logged in successfully";
                     header("Location: dashboard.php");
                     die();
                 } else {
@@ -42,10 +47,11 @@
                     header("Location: login.php");
                     die();
                 }
-            } 
-            // else {
-
-            // }
+            }
         };
+        $_SESSION['error'] = "User doesn't exist";
+        $_SESSION['formData'] = $data;
+        header("Location: login.php");
+        exit;
     }
 ?>

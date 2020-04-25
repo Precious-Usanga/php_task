@@ -31,7 +31,7 @@
             $formData['last_name']  = $data['last_name'];
         }
      
-        if(!isset($data['email'])|| $data['email'] == ""){
+        if(!isset($data['email'])|| $data['email'] === ""){
             $email_error = 'Email cannot be empty';
             $error['email_error'] = $email_error;
         } elseif(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
