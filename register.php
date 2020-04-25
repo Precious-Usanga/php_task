@@ -30,55 +30,118 @@
                                 <div class="alert alert-warning" role="alert">
                                     <?php 
                                         echo $_SESSION['error']; 
-                                        session_destroy();
                                     ?>
                                 </div>
-                            <?php } ?>
+                                <?php } ?>
                             <div class="form-group">
                                 <label for="first_name">First Name</label>
                                 <input type="text" class="form-control" id="first_name" name="first_name"
                                     <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['first_name'];}?>
                                     >
+                                    <?php if(isset($_SESSION['error']) && !empty($_SESSION['error']['firstname_error'])) {?>
+                                        <small class="form-text text-danger">
+                                            <?php 
+                                                echo $_SESSION['error']['firstname_error']; 
+                                                
+                                            ?>
+                                        </small>
+                                    <?php } ?>
                             </div>
                             <div class="form-group">
                                 <label for="last_name">Last Name</label>
                                 <input type="text" class="form-control" id="last_name" name="last_name"
                                 <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['last_name'];}?>
                                 >
+                                <?php if(isset($_SESSION['error']) && !empty($_SESSION['error']['lastname_error'])) {?>
+                                    <small class="form-text text-danger">
+                                        <?php 
+                                            echo $_SESSION['error']['lastname_error']; 
+                                            
+                                        ?>
+                                    </small>
+                                <?php } ?>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email address</label>
                                 <input type="email" class="form-control" id="email" name="email"
                                 <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['email'];}?>
                                 >
+                                <?php if(isset($_SESSION['error']) && !empty($_SESSION['error']['email_error'])) {?>
+                                    <small class="form-text text-danger">
+                                        <?php 
+                                            echo $_SESSION['error']['email_error']; 
+                                            
+                                        ?>
+                                    </small>
+                                <?php } ?>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" name="password"
                                 <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['password'];}?>
                                 >
+                                <?php if(isset($_SESSION['error']) && !empty($_SESSION['error']['password_error'])) {?>
+                                    <small class="form-text text-danger">
+                                        <?php 
+                                            echo $_SESSION['error']['password_error']; 
+                                            
+                                        ?>
+                                    </small>
+                                <?php } ?>
                             </div>
                             <div class="form-group">
                                 <label for="gender">Gender</label>
-                                <select name="gender" id="gender" <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['gender'];}?>>
+                                <select name="gender" id="gender">
                                     <option value="">Select</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="male" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['gender'] == 'male') {echo "selected";}?> >
+                                        Male
+                                    </option>
+                                    <option value="female" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['gender'] == 'female') { echo "selected";}?> >
+                                        Female
+                                    </option>
                                 </select>
+                                <?php if(isset($_SESSION['error']) && !empty($_SESSION['error']['gender_error'])) {?>
+                                    <small class="form-text text-danger">
+                                        <?php 
+                                            echo $_SESSION['error']['gender_error']; 
+                                            
+                                        ?>
+                                    </small>
+                                <?php } ?>
                             </div>
                             <div class="form-group">
                                 <label for="designation">Designation</label>
-                                <select name="designation" id="designation" <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['designation'];}?>>
+                                <select name="designation" id="designation">
                                     <option value="">Select</option>
-                                    <option value="medical_team">Medical Team</option>
-                                    <option value="patient">Patient</option>
+                                    <option value="medical_team" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['designation'] == 'medical_team') {echo "selected";}?> >
+                                        Medical Team
+                                    </option>
+                                    <option value="patient" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['designation'] == 'patient') {echo "selected";}?> >
+                                        Patient
+                                    </option>
                                 </select>
+                                <?php if(isset($_SESSION['error']) && !empty($_SESSION['error']['designation_error'])) {?>
+                                    <small class="form-text text-danger">
+                                        <?php 
+                                            echo $_SESSION['error']['designation_error']; 
+                                            
+                                        ?>
+                                    </small>
+                                <?php } ?>
                             </div>
                             <div class="form-group">
                                 <label for="department">Department</label>
                                 <input type="text" class="form-control" id="department" name="department"
                                     <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['department'];}?>
                                     >
+                                    <?php if(isset($_SESSION['error']) && !empty($_SESSION['error']['department_error'])) {?>
+                                        <small class="form-text text-danger">
+                                            <?php 
+                                                echo $_SESSION['error']['department_error']; 
+                                                
+                                            ?>
+                                        </small>
+                                    <?php } ?>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -88,3 +151,4 @@
         </div>
     </body>
     </html>
+    <?php session_destroy() ?>
