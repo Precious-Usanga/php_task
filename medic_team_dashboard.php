@@ -23,6 +23,6 @@
         </div>
  
     <?php } ?>
-    <h1>DASHBOARD</h1>
-    <p>Welcome! <?php echo $_SESSION['fullname'] . " " ."You're logged in as ".$_SESSION['role'].". Your Id is ".$_SESSION['loggedIn'] ?> </p>
+    <h1>STAFF DASHBOARD</h1>
+    <p>Welcome! <?php echo $_SESSION['fullname'] . " " ."You're logged in as ".$_SESSION['role'].". Your Id is ".$_SESSION['loggedIn'] ?></p>
     <?php include_once('lib/footer.php') ?>

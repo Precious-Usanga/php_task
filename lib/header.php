@@ -1,7 +1,13 @@
 <?php session_start();?>
 <?php 
     if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {
-        header("Location: dashboard.php");
+        if($_SESSION['role'] === 'patient') {
+            header("Location: patients_dashboard.php");
+        } elseif ($_SESSION['role'] === 'medical_team') {
+            header("Location: medic_team_dashboard.php");
+        } else {
+            header("Location: dashboard.php");
+        }
     }
 ?>
 

@@ -39,9 +39,16 @@
                 $verifypassword = password_verify($formData['password'], $userData->password);
                 if($verifypassword == true) {
                     $_SESSION['success'] = "Hello ".$userData->first_name." ".$userData->last_name." You're Logged in successfully";
-                    $_SESSION['loggedIn'] = $userData; 
-                    // if($userData->designation)
-                    header("Location: dashboard.php");
+                    $_SESSION['loggedIn'] = $userData->id; 
+                    $_SESSION['fullname'] = $userData->first_name. " " .$userData->last_name;
+                    $_SESSION['role'] = $userData->designation; 
+                    if($_SESSION['role'] === 'patient') {
+                        header("Location: patients_dashboard.php");
+                    } elseif ($_SESSION['role'] === 'medical_team') {
+                        header("Location: medic_team_dashboard.php");
+                    } else {
+                        header("Location: dashboard.php");
+                    }
                     die();
                 } else {
                     $_SESSION['error'] = "Invalid username or password";

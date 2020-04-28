@@ -100,7 +100,7 @@
                 die();
             }
         };
-        file_put_contents('db/users/'.$email.'.json', json_encode($postData, JSON_PRETTY_PRINT));
+        file_put_contents('db/users/'.$postData['email'].'.json', json_encode($postData, JSON_PRETTY_PRINT));
         header("Location: login.php");
         $_SESSION['success'] = "Registration Successful! Please Login";
     }
