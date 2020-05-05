@@ -7,7 +7,7 @@
                     <a class="nav-link" href="logout.php">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="reset_password.php">Reset Password</a>
+                    <a class="nav-link" href="reset_password.php">Change Password</a>
                 </li>
             <?php } else {?>
                 <li class="nav-item">
