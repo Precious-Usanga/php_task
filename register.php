@@ -7,6 +7,7 @@
                         <div class="alert alert-warning" role="alert">
                             <?php 
                                 echo $_SESSION['error']; 
+                                session_destroy();
                             ?>
                         </div>
                     <?php } ?>

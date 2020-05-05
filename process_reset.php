@@ -5,11 +5,10 @@
  $formData = [];
 
  if($data){
+    //  form error handling
     if(!isset($data['token']) || $data['token'] === ""){
         $token_error = "invalid reset token";
         $error['token_error'] = $token_error;
-        // header("Location: reset_password.php");
-        // die();
     } else {
         $formData['token']  = $data['token'];
     }
@@ -49,19 +48,25 @@
             $tokenFile = file_get_contents('db/tokens/'.$reset_passsword_tokens[$i]);
             $tokenObject = json_decode($tokenFile);
             if($formData['token'] == $tokenObject->token) {
-
+                // get, hash and store new password
                 $newPassword = password_hash($formData['password'], PASSWORD_DEFAULT);
+                // get users db 
                 $all_users = scandir('db/users');
+                // fetch exact user file
                 for($i = 0; $i < count($all_users); $i++){
                     if($formData['email'].'.json' == $all_users[$i]) {
-                        $userFile = file_get_contents('db/users/'.$all_users[$i]);
-                        $userData = json_decode($userFile);
-                        $userData->password = $newPassword;
-                        unlink('db/users/'.$all_users[$i]);
+                        $userFile = file_get_contents('db/users/'.$all_users[$i]); //read file content in a string
+                        $userData = json_decode($userFile); // convert string format to object for easy manipulation
+                        $userData->password = $newPassword; // set new user password
+                        // delete old user file
+                        unlink('db/users/'.$all_users[$i]); 
                     }
                 };
+                // create new file in db to hold updated user data
                 file_put_contents('db/users/'.$formData['email'].'.json', json_encode($userData, JSON_PRETTY_PRINT));
+                //  delete user password reset token
                 unlink('db/tokens/'.$reset_passsword_tokens[$i]);
+                // display success message and redirect to login
                 $_SESSION['success'] = "Password reset successful. Please Login.";
                 header("Location: login.php");
                 die();
