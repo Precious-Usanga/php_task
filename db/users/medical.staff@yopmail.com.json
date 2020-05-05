@@ -1,0 +1,10 @@
+{
+    "id": 1,
+    "first_name": "Medical",
+    "last_name": "Staff",
+    "email": "medical.staff@yopmail.com",
+    "password": "$2y$10$rM19e7j4pqjBU4rZmBIese0HVRA\/2ZrP2A2u99zYERKQJM8ziSkpW",
+    "designation": "medical_team",
+    "gender": "male",
+    "department": "xray"
+}

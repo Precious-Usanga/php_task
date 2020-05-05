@@ -1,4 +1,17 @@
-<?php include_once('lib/header.php') ?>
+<?php include_once('lib/header.php');
+    if(isset($_SESSION['loggedIn'])) {
+        if($_SESSION['role'] === 'patient') {
+            header("Location: patients_dashboard.php");
+            die();
+        } elseif ($_SESSION['role'] === 'medical_team') {
+            header("Location: medic_team_dashboard.php");
+            die();
+        } elseif ($_SESSION['role'] === 'admin'){
+            header("Location: dashboard.php");
+            die();
+        }
+    }
+?>
 
     <div class="container">
         <h3>Forgot Password</h3>

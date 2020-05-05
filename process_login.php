@@ -40,7 +40,8 @@
                 $verifypassword = password_verify($formData['password'], $userData->password);
                 if($verifypassword == true) {
                     $_SESSION['success'] = "Hello ".$userData->first_name." ".$userData->last_name." You're Logged in successfully";
-                    $_SESSION['loggedIn'] = $userData->id; 
+                    $_SESSION['loggedIn'] = $userData->id;
+                    $_SESSION['email'] = $userData->email; 
                     $_SESSION['fullname'] = $userData->first_name. " " .$userData->last_name;
                     $_SESSION['role'] = $userData->designation; 
                     if($_SESSION['role'] === 'patient') {

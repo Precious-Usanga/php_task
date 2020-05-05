@@ -1,9 +1,9 @@
 {
-    "id": 3,
+    "id": 2,
     "first_name": "Patient",
-    "last_name": "Test",
+    "last_name": "Pat",
     "email": "patient@yopmail.com",
-    "password": "$2y$10$\/fdfLy85yo9q.sKQkMtaXuai90maDgjeZ6hm9UzeLhSN5EsnGWipO",
+    "password": "$2y$10$Q26PeTZCBZ\/TE\/ep\/OIE8.NXpgbpARMo0DYGMt0cTJq.fSAS\/D8re",
     "designation": "patient",
     "gender": "female",
     "department": "ICU"
