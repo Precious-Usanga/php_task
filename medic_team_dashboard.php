@@ -1,6 +1,8 @@
 <?php session_start(); 
     if(!isset($_SESSION['loggedIn'])) {
         header("Location: login.php");
+    } elseif(isset($_SESSION['loggedIn']) && $_SESSION['role'] != 'medical_team') {
+        header("Location: login.php");
     }
 ?>
 

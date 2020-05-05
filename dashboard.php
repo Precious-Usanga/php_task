@@ -1,6 +1,8 @@
 <?php session_start(); 
     if(!isset($_SESSION['loggedIn'])) {
         header("Location: login.php");
+    } elseif(isset($_SESSION['loggedIn']) && $_SESSION['role'] != 'admin') {
+        header("Location: login.php");
     }
 ?>
 
