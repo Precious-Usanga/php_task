@@ -28,21 +28,19 @@
                             <small class="form-text text-danger">
                                 <?php 
                                     echo $_SESSION['login_error']['email_error']; 
-                                    // session_destroy();
+                                    session_destroy();
                                 ?>
                             </small>
                         <?php } ?>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password"
-                        <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['password'];}?>
-                        >
-                        <?php if(isset($_SESSION['login_error']) && !empty($_SESSION['login_error']['email_error'])) {?>
+                        <input type="password" class="form-control" id="password" name="password">
+                        <?php if(isset($_SESSION['login_error']) && !empty($_SESSION['login_error']['password_error'])) {?>
                             <small class="form-text text-danger">
                                 <?php 
                                     echo $_SESSION['login_error']['password_error']; 
-                                    // session_destroy();
+                                    session_destroy();
                                 ?>
                             </small>
                         <?php } ?>

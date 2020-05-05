@@ -19,6 +19,7 @@
                                 <small class="form-text text-danger">
                                     <?php 
                                         echo $_SESSION['register_error']['firstname_error']; 
+                                        session_destroy();
                                     ?>
                                 </small>
                             <?php } ?>
@@ -32,7 +33,7 @@
                             <small class="form-text text-danger">
                                 <?php 
                                     echo $_SESSION['register_error']['lastname_error']; 
-                                    
+                                    session_destroy();
                                 ?>
                             </small>
                         <?php } ?>
@@ -46,7 +47,7 @@
                             <small class="form-text text-danger">
                                 <?php 
                                     echo $_SESSION['register_error']['email_error']; 
-                                    
+                                    session_destroy();
                                 ?>
                             </small>
                         <?php } ?>
@@ -60,7 +61,7 @@
                             <small class="form-text text-danger">
                                 <?php 
                                     echo $_SESSION['register_error']['password_error']; 
-                                    
+                                    session_destroy();
                                 ?>
                             </small>
                         <?php } ?>
@@ -80,7 +81,7 @@
                             <small class="form-text text-danger">
                                 <?php 
                                     echo $_SESSION['register_error']['gender_error']; 
-                                    
+                                    session_destroy();
                                 ?>
                             </small>
                         <?php } ?>
@@ -100,7 +101,7 @@
                             <small class="form-text text-danger">
                                 <?php 
                                     echo $_SESSION['register_error']['designation_error']; 
-                                    
+                                    session_destroy();
                                 ?>
                             </small>
                         <?php } ?>
@@ -114,7 +115,7 @@
                                 <small class="form-text text-danger">
                                     <?php 
                                         echo $_SESSION['register_error']['department_error']; 
-                                        
+                                        session_destroy();
                                     ?>
                                 </small>
                             <?php } ?>

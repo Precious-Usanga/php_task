@@ -77,6 +77,7 @@
         $_SESSION['register_error'] = $error;
         $_SESSION['formData'] = $data;
         header("Location: register.php");
+        die();
     } else {
         $all_users = scandir('db/users');
         // print_r($all_users);

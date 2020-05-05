@@ -1,0 +1,10 @@
+{
+    "id": 3,
+    "first_name": "Patient",
+    "last_name": "Test",
+    "email": "patient@yopmal.com",
+    "password": "$2y$10$5Hs.0q0Z5\/GuHeL03\/2sN.qLVT4PDNnBj0AF58ovr\/dCF8G8ObzM.",
+    "designation": "patient",
+    "gender": "female",
+    "department": "ICU"
+}

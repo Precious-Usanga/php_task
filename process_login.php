@@ -29,6 +29,7 @@
         $_SESSION['login_error'] = $error;
         $_SESSION['formData'] = $data;
         header("Location: login.php");
+        die();
     } else {
         $all_users = scandir('db/users');
 
