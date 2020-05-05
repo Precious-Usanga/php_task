@@ -1,7 +1,6 @@
 <?php session_start(); 
-    if(!isset($_SESSION['loggedIn'])) {
-        header("Location: login.php");
-    }
+    require_once('functions/session.php');
+    dashboardCheck('admin');
 ?>
 
 <!DOCTYPE html>
@@ -15,14 +14,7 @@
 </head>
 <body>
 
-    <?php if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {?>
-        <div class="alert alert-success" role="alert">
-            <?php 
-                echo $_SESSION['success'];
-            ?>
-        </div>
- 
-    <?php } ?>
+    <?php success(); ?>
     <h1>DASHBOARD</h1>
     <p>Welcome! <?php echo $_SESSION['fullname'] . " " ."You're logged in as ".$_SESSION['role'].". Your Id is ".$_SESSION['loggedIn'] ?> </p>
     

@@ -1,85 +1,45 @@
-<?php include('lib/header.php'); 
-    if(isset($_SESSION['loggedIn'])) {
-        if($_SESSION['role'] === 'patient') {
-            header("Location: patients_dashboard.php");
-            die();
-        } elseif ($_SESSION['role'] === 'medical_team') {
-            header("Location: medic_team_dashboard.php");
-            die();
-        } elseif ($_SESSION['role'] === 'admin'){
-            header("Location: dashboard.php");
-            die();
-        }
-    }
+<?php 
+        include_once('lib/header.php');
+        require_once('functions/session.php'); 
+        is_logged_in();
+        require_once('functions/errorHandler.php');
+        require_once('functions/form.php');
+        
+    
 ?>
 
     <div class="container">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_register.php">
-                    <?php if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {?>
-                        <div class="alert alert-warning" role="alert">
-                            <?php 
-                                echo $_SESSION['error']; 
-                                session_destroy();
-                            ?>
-                        </div>
-                    <?php } ?>
+                    <?php alert(); ?>
                     <div class="form-group">
                         <label for="first_name">First Name</label>
                         <input type="text" class="form-control" id="first_name" name="first_name"
-                            <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['first_name'];}?>
-                            >
-                            <?php if(isset($_SESSION['register_error']) && !empty($_SESSION['register_error']['firstname_error'])) {?>
-                                <small class="form-text text-danger">
-                                    <?php 
-                                        echo $_SESSION['register_error']['firstname_error']; 
-                                        session_destroy();
-                                    ?>
-                                </small>
-                            <?php } ?>
+                            <?php patchValue('first_name'); ?>
+                        >
+                        <?php formActionError('register_error', 'firstname_error'); ?>
                     </div>
                     <div class="form-group">
                         <label for="last_name">Last Name</label>
                         <input type="text" class="form-control" id="last_name" name="last_name"
-                        <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['last_name'];}?>
+                        <?php patchValue('last_name'); ?>
                         >
-                        <?php if(isset($_SESSION['register_error']) && !empty($_SESSION['register_error']['lastname_error'])) {?>
-                            <small class="form-text text-danger">
-                                <?php 
-                                    echo $_SESSION['register_error']['lastname_error']; 
-                                    session_destroy();
-                                ?>
-                            </small>
-                        <?php } ?>
+                        <?php formActionError('register_error', 'lastname_error'); ?>
                     </div>
                     <div class="form-group">
                         <label for="email">Email address</label>
                         <input type="email" class="form-control" id="email" name="email"
-                        <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['email'];}?>
+                        <?php patchValue('email'); ?>
                         >
-                        <?php if(isset($_SESSION['register_error']) && !empty($_SESSION['register_error']['email_error'])) {?>
-                            <small class="form-text text-danger">
-                                <?php 
-                                    echo $_SESSION['register_error']['email_error']; 
-                                    session_destroy();
-                                ?>
-                            </small>
-                        <?php } ?>
+                        <?php formActionError('register_error', 'email_error'); ?>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password"
-                        <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['password'];}?>
+                        <?php patchValue('password'); ?>
                         >
-                        <?php if(isset($_SESSION['register_error']) && !empty($_SESSION['register_error']['password_error'])) {?>
-                            <small class="form-text text-danger">
-                                <?php 
-                                    echo $_SESSION['register_error']['password_error']; 
-                                    session_destroy();
-                                ?>
-                            </small>
-                        <?php } ?>
+                        <?php formActionError('register_error', 'password_error'); ?>
                     </div>
                     <div class="form-group">
                         <label for="gender">Gender</label>
@@ -92,14 +52,7 @@
                                 Female
                             </option>
                         </select>
-                        <?php if(isset($_SESSION['register_error']) && !empty($_SESSION['register_error']['gender_error'])) {?>
-                            <small class="form-text text-danger">
-                                <?php 
-                                    echo $_SESSION['register_error']['gender_error']; 
-                                    session_destroy();
-                                ?>
-                            </small>
-                        <?php } ?>
+                        <?php formActionError('register_error', 'gender_error'); ?>
                     </div>
                     <div class="form-group">
                         <label for="designation">Designation</label>
@@ -115,28 +68,14 @@
                                 Patient
                             </option>
                         </select>
-                        <?php if(isset($_SESSION['register_error']) && !empty($_SESSION['register_error']['designation_error'])) {?>
-                            <small class="form-text text-danger">
-                                <?php 
-                                    echo $_SESSION['register_error']['designation_error']; 
-                                    session_destroy();
-                                ?>
-                            </small>
-                        <?php } ?>
+                        <?php formActionError('register_error', 'designation_error'); ?>
                     </div>
                     <div class="form-group">
                         <label for="department">Department</label>
                         <input type="text" class="form-control" id="department" name="department"
-                            <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['department'];}?>
+                            <?php patchValue('department'); ?>
                             >
-                            <?php if(isset($_SESSION['register_error']) && !empty($_SESSION['register_error']['department_error'])) {?>
-                                <small class="form-text text-danger">
-                                    <?php 
-                                        echo $_SESSION['register_error']['department_error']; 
-                                        session_destroy();
-                                    ?>
-                                </small>
-                            <?php } ?>
+                            <?php formActionError('register_error', 'fdepartment_error'); ?>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

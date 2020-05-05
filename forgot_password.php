@@ -1,16 +1,8 @@
-<?php include_once('lib/header.php');
-    if(isset($_SESSION['loggedIn'])) {
-        if($_SESSION['role'] === 'patient') {
-            header("Location: patients_dashboard.php");
-            die();
-        } elseif ($_SESSION['role'] === 'medical_team') {
-            header("Location: medic_team_dashboard.php");
-            die();
-        } elseif ($_SESSION['role'] === 'admin'){
-            header("Location: dashboard.php");
-            die();
-        }
-    }
+<?php 
+    include_once('lib/header.php');
+    require_once('functions/session.php'); 
+    require_once('functions/errorHandler.php');
+    require_once('functions/form.php');
 ?>
 
     <div class="container">
@@ -19,27 +11,13 @@
         <div class="card" style="width: 22rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_forgot.php">
-                    <?php if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {?>
-                        <div class="alert alert-warning" role="alert">
-                            <?php 
-                                echo $_SESSION['error']; 
-                                session_destroy();
-                            ?>
-                        </div>
-                    <?php } ?>
+                    <?php alert(); ?>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email"
-                        <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['email'];}?>
+                        <?php patchValue('email'); ?>
                         >
-                        <?php if(isset($_SESSION['forgot_error']) && !empty($_SESSION['forgot_error']['email_error'])) {?>
-                            <small class="form-text text-danger">
-                                <?php 
-                                    echo $_SESSION['forgot_error']['email_error']; 
-                                    session_destroy();
-                                ?>
-                            </small>
-                        <?php } ?>
+                        <?php formActionError('forgot_error', 'email_error'); ?>
                     </div>
                     <button type="submit" class="btn btn-primary">Send Code</button>
                 </form>
