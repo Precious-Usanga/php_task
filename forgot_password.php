@@ -2,7 +2,7 @@
 
     <div class="container">
         <h3>Forgot Password</h3>
-        <p>Provide the Email address associated with this account</p>
+        <p>Provide the Email address associated with your account</p>
         <div class="card" style="width: 22rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_forgot.php">
@@ -28,7 +28,7 @@
                             </small>
                         <?php } ?>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Send Code</button>
                 </form>
             </div>
         </div>
