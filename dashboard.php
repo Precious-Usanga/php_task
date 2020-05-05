@@ -25,4 +25,8 @@
     <?php } ?>
     <h1>DASHBOARD</h1>
     <p>Welcome! <?php echo $_SESSION['fullname'] . " " ."You're logged in as ".$_SESSION['role'].". Your Id is ".$_SESSION['loggedIn'] ?> </p>
+
+    <button class="btn">
+      Add Users
+    </button>
     <?php include_once('lib/footer.php') ?>

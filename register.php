@@ -91,6 +91,9 @@
                         <label for="designation">Designation</label>
                         <select name="designation" id="designation">
                             <option value="">Select</option>
+                            <option value="admin" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['designation'] == 'admin') {echo "selected";}?> >
+                                Admin
+                            </option>
                             <option value="medical_team" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['designation'] == 'medical_team') {echo "selected";}?> >
                                 Medical Team
                             </option>

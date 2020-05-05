@@ -42,10 +42,10 @@
     header("Location: reset_password.php");
     die();
  } else {
-    $reset_passsword_tokens = scandir('db/tokens');
-    for($i = 0; $i < count($reset_passsword_tokens); $i++){
-        if($formData['email'].'.json' == $reset_passsword_tokens[$i]){
-            $tokenFile = file_get_contents('db/tokens/'.$reset_passsword_tokens[$i]);
+    $reset_password_tokens = scandir('db/tokens');
+    for($i = 0; $i < count($reset_password_tokens); $i++){
+        if($formData['email'].'.json' == $reset_password_tokens[$i]){
+            $tokenFile = file_get_contents('db/tokens/'.$reset_password_tokens[$i]);
             $tokenObject = json_decode($tokenFile);
             if($formData['token'] == $tokenObject->token) {
                 // get, hash and store new password
@@ -64,12 +64,21 @@
                 };
                 // create new file in db to hold updated user data
                 file_put_contents('db/users/'.$formData['email'].'.json', json_encode($userData, JSON_PRETTY_PRINT));
-                //  delete user password reset token
-                unlink('db/tokens/'.$reset_passsword_tokens[$i]);
+
+                // send email informing user of successful password reset activity
+                $to = $formData['email'];
+                $subject = "Password Reset Successful";
+                $message = "Your password reset is successful.\n If you do not recognize this activity please contact the IT team.\n";
+                $headers = "From: no-reply@snh.org";
+                $send = mail($to,$subject,wordwrap($message, 70),$headers);
+
+                 //  delete user password reset token
+                 unlink('db/tokens/'.$formData['email'].'.json');
+                
                 // display success message and redirect to login
                 $_SESSION['success'] = "Password reset successful. Please Login.";
                 header("Location: login.php");
-                die();
+                // die();
             } else {
                 $_SESSION['error'] = "Password reset failed. Invalid token or email.";
                 header("Location: login.php");

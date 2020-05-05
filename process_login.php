@@ -47,7 +47,7 @@
                         header("Location: patients_dashboard.php");
                     } elseif ($_SESSION['role'] === 'medical_team') {
                         header("Location: medic_team_dashboard.php");
-                    } else {
+                    } elseif ($_SESSION['role'] === 'admin') {
                         header("Location: dashboard.php");
                     }
                     die();
