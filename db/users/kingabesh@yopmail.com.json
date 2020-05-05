@@ -1,0 +1,11 @@
+{
+    "id": 6,
+    "first_name": "king",
+    "last_name": "abesh",
+    "email": "kingabesh@yopmail.com",
+    "password": "$2y$10$ANg2FkZ6JJfs8FjRHv1yq.1CccU9zhst8Q22eKBZJgpA\/Apd38Qhq",
+    "designation": "medical_team",
+    "gender": "male",
+    "department": "ICU",
+    "lastLogin": "05\/05\/2020 02:38:57 pm"
+}

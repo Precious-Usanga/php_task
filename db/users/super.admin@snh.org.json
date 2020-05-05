@@ -1,0 +1,10 @@
+{
+    "id": 3,
+    "first_name": "Super",
+    "last_name": "Admin",
+    "email": "super.admin@snh.org",
+    "password": "$2y$10$YqOlP3lFuGPEZT4XzxEsCOlIJAzgZG7j6UeeI9s.Sa8ECy0H91RMa",
+    "designation": "admin",
+    "gender": "male",
+    "department": "ADMIN"
+}

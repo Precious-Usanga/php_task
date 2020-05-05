@@ -25,4 +25,12 @@
     <?php } ?>
     <h1>STAFF DASHBOARD</h1>
     <p>Welcome! <?php echo $_SESSION['fullname'] . " " ."You're logged in as ".$_SESSION['role'].". Your Id is ".$_SESSION['loggedIn'] ?></p>
+    <div class="card" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Role: <?php echo $_SESSION['role']; ?></li>
+            <li class="list-group-item">Department: <?php echo $_SESSION['department']; ?></li>
+            <li class="list-group-item">Date of Registration: <?php echo $_SESSION['dateOfReg']; ?></li>
+            <li class="list-group-item">Last Login: <?php echo $_SESSION['lastLogin']; ?></li>
+        </ul>
+    </div>
     <?php include_once('lib/footer.php') ?>

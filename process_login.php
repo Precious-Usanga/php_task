@@ -43,7 +43,11 @@
                     $_SESSION['loggedIn'] = $userData->id;
                     $_SESSION['email'] = $userData->email; 
                     $_SESSION['fullname'] = $userData->first_name. " " .$userData->last_name;
-                    $_SESSION['role'] = $userData->designation; 
+                    $_SESSION['role'] = $userData->designation;
+                    $_SESSION['department'] = $userData->department;
+                    $_SESSION['dateOfReg'] = $userData->dateOfReg;
+                    $_SESSION['lastLogin'] = $userData->lastLogin;
+                     
                     if($_SESSION['role'] === 'patient') {
                         header("Location: patients_dashboard.php");
                     } elseif ($_SESSION['role'] === 'medical_team') {

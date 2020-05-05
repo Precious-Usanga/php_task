@@ -76,7 +76,11 @@
     if (!empty($error)) {
         $_SESSION['register_error'] = $error;
         $_SESSION['formData'] = $data;
-        header("Location: register.php");
+        if(isset($_SESSION['loggedIn'])){
+            header("Location: dashboard.php");
+        } else {
+            header("Location: register.php");
+        }
         die();
     } else {
         $all_users = scandir('db/users');
@@ -90,7 +94,8 @@
             'password'=> password_hash($formData['password'], PASSWORD_DEFAULT),
             'designation'=> $formData['designation'],
             'gender'=> $formData['gender'],
-            'department'=> $formData['department']
+            'department'=> $formData['department'],
+            'dateOfReg'=> date('m/d/Y h:i:s a', time())
         ];
         // print_r($postData); exit;
         for($i = 0; $i < count($all_users); $i++){
@@ -102,7 +107,12 @@
             }
         };
         file_put_contents('db/users/'.$postData['email'].'.json', json_encode($postData, JSON_PRETTY_PRINT));
-        header("Location: login.php");
-        $_SESSION['success'] = "Registration Successful! Please Login";
+        if(isset($_SESSION['loggedIn'])){
+            $_SESSION['success'] = "New User Created";
+            header("Location: dashboard.php");
+        } else {
+            $_SESSION['success'] = "Registration Successful! Please Login";
+            header("Location: login.php");
+        }
     }
 ?>
