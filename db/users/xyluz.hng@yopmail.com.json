@@ -6,5 +6,6 @@
     "password": "$2y$10$WHLYKnDUkgS0WMjTlVOIeOKAF5XzZyLn39\/vfupccU7WUYiktCcya",
     "designation": "medical_team",
     "gender": "male",
-    "department": "xray"
+    "department": "xray",
+    "lastLogin": "05\/06\/2020 07:48:36 am"
 }

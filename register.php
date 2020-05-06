@@ -2,8 +2,8 @@
         include_once('lib/header.php');
         require_once('functions/session.php'); 
         is_logged_in();
-        require_once('functions/errorHandler.php');
         require_once('functions/form.php');
+        require_once('functions/errorHandler.php');
         
     
 ?>
@@ -75,7 +75,7 @@
                         <input type="text" class="form-control" id="department" name="department"
                             <?php patchValue('department'); ?>
                             >
-                            <?php formActionError('register_error', 'fdepartment_error'); ?>
+                            <?php formActionError('register_error', 'department_error'); ?>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

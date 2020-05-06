@@ -28,7 +28,7 @@
     function success() {
         if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
             echo "<div class='alert alert-success' role='alert'>" .$_SESSION['success'] . "</div>";
-            session_destroy();
+            // session_unset();
         }
     }
 
@@ -40,7 +40,7 @@
                     $userFile = file_get_contents('db/users/'.$all_users[$i]);
                     $userData = json_decode($userFile);
                     $userData->lastLogin = date('m/d/Y h:i:s a', time());
-                    file_put_contents('db/users/'.$_SESSION['email'].'.json', json_encode($userData, JSON_PRETTY_PRINT));
+                    file_put_contents('db/users/'.$all_users[$i], json_encode($userData, JSON_PRETTY_PRINT));
                 }
             }
             logout();

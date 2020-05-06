@@ -6,5 +6,6 @@
     "password": "$2y$10$YqOlP3lFuGPEZT4XzxEsCOlIJAzgZG7j6UeeI9s.Sa8ECy0H91RMa",
     "designation": "admin",
     "gender": "male",
-    "department": "ADMIN"
+    "department": "ADMIN",
+    "lastLogin": "05\/06\/2020 08:58:42 am"
 }

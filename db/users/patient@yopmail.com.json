@@ -6,5 +6,6 @@
     "password": "$2y$10$Q26PeTZCBZ\/TE\/ep\/OIE8.NXpgbpARMo0DYGMt0cTJq.fSAS\/D8re",
     "designation": "patient",
     "gender": "female",
-    "department": "ICU"
+    "department": "ICU",
+    "lastLogin": "05\/06\/2020 08:54:06 am"
 }

@@ -1,0 +1,12 @@
+{
+    "id": 8,
+    "first_name": "Precious",
+    "last_name": "Ukot",
+    "email": "precious.ukot@yopmail.com",
+    "password": "$2y$10$JJGq2FS7gOslSJtpdUlaceTrvR4irYLo2CmREPrvuygemFQIlDeMK",
+    "designation": "medical_team",
+    "gender": "female",
+    "department": "Microbiology",
+    "dateOfReg": "05\/06\/2020 08:18:20 am",
+    "lastLogin": "05\/06\/2020 10:10:41 am"
+}

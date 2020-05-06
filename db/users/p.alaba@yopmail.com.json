@@ -1,0 +1,12 @@
+{
+    "id": 7,
+    "first_name": "patient",
+    "last_name": "alaba",
+    "email": "p.alaba@yopmail.com",
+    "password": "$2y$10$qSwWcAlJjbZpWFlRTN.Bg.8FLHAoRXl2KZRyCOPZawxNxuocfhDEq",
+    "designation": "patient",
+    "gender": "female",
+    "department": "ICU",
+    "dateOfReg": "05\/06\/2020 07:59:57 am",
+    "lastLogin": "05\/06\/2020 08:17:18 am"
+}
