@@ -12,7 +12,7 @@
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_register.php">
-                    <?php alert(); ?>
+                    <?php alert(); session_destroy();?>
                     <div class="form-group">
                         <label for="first_name">First Name</label>
                         <input type="text" class="form-control" id="first_name" name="first_name"

@@ -7,7 +7,7 @@
 
 ?>
 
-    <?php success(); ?>
+    <?php success(); session_destroy();?>
     <div class="container">
         <div class="card" style="width: 18rem;">
             <div class="card-body">

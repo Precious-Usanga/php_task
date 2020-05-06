@@ -21,7 +21,7 @@
         <div class="card" style="width: 22rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_reset.php">
-                    <?php alert(); ?>
+                    <?php alert(); session_destroy(); ?>
                     <?php if(isset($_SESSION['loggedIn'])) { ?>
                         <div class="form-group">
                             <label for="email">Email</label>
