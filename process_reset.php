@@ -3,7 +3,7 @@
 
     require_once('functions/user.php');
     
-    if(isset($_SESSION['loggedIn'])) {
+    if(is_user_loggedIn()) {
         changePassword($_POST);
     } else {
         resetPassword($_POST);

@@ -28,4 +28,4 @@
         </ul>
     </div>
     
-    <?php include_once('lib/footer.php') ?>
+<?php include_once('lib/footer.php') ?>

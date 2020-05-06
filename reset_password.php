@@ -1,7 +1,8 @@
 <?php 
     include_once('lib/header.php');
+    require_once('functions/user.php');
     
-    if(!isset($_SESSION['loggedIn']) && !isset($_GET['token']) && !isset($_SESSION['formData']['token'])){
+    if(!is_user_loggedIn() && !is_token_set()){
         $_SESSION['error'] = "Invalid reset link. You're not authorized to view this page"; 
         header("Location: login.php");
         die();
@@ -13,7 +14,7 @@
 
     <div class="container">
         <h3>Reset Password</h3>
-        <?php if(isset($_SESSION['loggedIn'])) { ?>
+        <?php if(is_user_loggedIn()) { ?>
             <p>Reset Password associated with <?php echo $_SESSION['email']; ?> </p>
         <?php } else {?>
             <p>Fill the form below to reset your password</p>
@@ -21,11 +22,11 @@
         <div class="card" style="width: 22rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_reset.php">
-                    <?php alert(); session_destroy(); ?>
-                    <?php if(isset($_SESSION['loggedIn'])) { ?>
+                    <?php alert();?>
+                    <?php if(is_user_loggedIn()) { ?>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" readonly <?php echo "value=".$_SESSION['email'];?>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" readonly <?php patchValue('email');?>
                             >
                             <?php formActionError('reset_error', 'email_error'); ?>
                         </div>
@@ -43,7 +44,7 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Email" 
-                            <?php if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['formData'])) {echo "value=".$_SESSION['formData']['email'];}?>
+                            <?php patchValue('email'); ?>
                             >
                             <?php formActionError('reset_error', 'email_error'); ?>
                         </div>

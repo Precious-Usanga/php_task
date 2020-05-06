@@ -1,7 +1,8 @@
 <?php 
+    require_once('functions/user.php');
 
-    function is_logged_in(){
-        if(isset($_SESSION['loggedIn'])) {
+    function acl_redirect(){
+        if(is_user_loggedIn()) {
             if($_SESSION['role'] === 'patient') {
                 header("Location: patients_dashboard.php");
                 die();
@@ -16,9 +17,9 @@
     }
 
     function dashboardCheck($role){
-        if(!isset($_SESSION['loggedIn'])) {
+        if(!is_user_loggedIn()) {
             header("Location: login.php");
-        } elseif (isset($_SESSION['loggedIn']) && $_SESSION['role'] != $role) {
+        } elseif (is_user_loggedIn() && $_SESSION['role'] != $role) {
             $_SESSION['error'] = "You cannot access that page";
             header("Location: login.php");
             exit;
@@ -33,7 +34,7 @@
     }
 
     function recordLastLogin() {
-        if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {
+        if(is_user_loggedIn()) {
             $all_users = scandir('db/users');
             for($i = 0; $i < count($all_users); $i++){
                 if($_SESSION['email'].'.json' == $all_users[$i]){

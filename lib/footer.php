@@ -2,7 +2,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.php">Home</a>
             </li>
-            <?php if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])) {?>
+            <?php if(is_user_loggedIn()) {?>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php">Logout</a>
                 </li>

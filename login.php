@@ -1,7 +1,7 @@
 <?php
     include_once('lib/header.php');
     require_once('functions/session.php'); 
-    is_logged_in();
+    acl_redirect();
     require_once('functions/errorHandler.php');
     require_once('functions/form.php');
 

@@ -27,4 +27,4 @@
             <li class="list-group-item">Last Login: <?php echo $_SESSION['lastLogin']; ?></li>
         </ul>
     </div>
-    <?php include_once('lib/footer.php') ?>
+<?php include_once('lib/footer.php') ?>

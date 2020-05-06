@@ -1,6 +1,20 @@
 <?php 
     require_once('functions/form.php');
 
+    function is_user_loggedIn(){
+        if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])){
+            return true;
+        }
+        return false;
+    }
+
+    function is_token_set(){
+        if(isset($_GET['token']) || isset($_SESSION['formData']['token'])){
+            return true;
+        }
+        return false;
+    }
+
     function registerUser($formMethod){
         $form = validateForm($formMethod);
         $error = $form['error'];
@@ -40,7 +54,7 @@
                 }
             };
             file_put_contents('db/users/'.$postData['email'].'.json', json_encode($postData, JSON_PRETTY_PRINT));
-            if(isset($_SESSION['loggedIn'])){
+            if(is_user_loggedIn()){
                 $_SESSION['success'] = "New User Created";
                 header("Location: dashboard.php");
             } else {
@@ -101,7 +115,6 @@
             exit;
         }
     }
-
 
     function forgotPassword($formMethod){
         $form = validateForm($formMethod);
@@ -169,6 +182,7 @@
 
     function resetPassword($formMethod){
         $form = validateForm($formMethod);
+        
         $error = $form['error'];
         $data = $form['data'];
         $formData = $form['formData'];
@@ -223,6 +237,9 @@
                     }
                 }
             }
+            $_SESSION['error'] = "Password reset failed. Invalid token or email.";
+            header("Location: login.php");
+            die();
         }
     }
 
