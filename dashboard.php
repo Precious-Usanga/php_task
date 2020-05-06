@@ -1,7 +1,7 @@
 <?php session_start(); 
     require_once('functions/session.php');
     dashboardCheck('admin');
-    require_once('functions/errorHandler.php');
+    require_once('functions/alertHandler.php');
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +45,7 @@
                 </div>
                 <form role="form" method="POST" action="process_register.php" style="overflow-y:auto !important;">
                     <div class="modal-body">
-                        <?php alert(); ?>
+                        <?php error(); ?>
                         <div class="form-group">
                             <label for="first_name">First Name</label>
                             <input type="text" class="form-control" id="first_name" name="first_name" <?php patchValue('first_name'); ?> >

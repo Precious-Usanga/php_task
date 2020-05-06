@@ -26,12 +26,6 @@
         }
     }
 
-    function success() {
-        if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
-            echo "<div class='alert alert-success' role='alert'>" .$_SESSION['success'] . "</div>";
-            // session_unset();
-        }
-    }
 
     function recordLastLogin() {
         if(is_user_loggedIn()) {

@@ -1,7 +1,7 @@
 <?php session_start(); 
     require_once('functions/session.php');
     dashboardCheck('medical_team');
-    require_once('functions/errorHandler.php');
+    require_once('functions/alertHandler.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 </head>
 <body>
 
-    <?php alert(); ?>
+    <?php error(); ?>
     <?php success(); ?>
     <h1>STAFF DASHBOARD</h1>
     <p>Welcome! <?php echo $_SESSION['fullname'] . " " ."You're logged in as ".$_SESSION['role'].". Your Id is ".$_SESSION['loggedIn'] ?></p>

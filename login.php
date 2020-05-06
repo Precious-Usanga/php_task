@@ -2,7 +2,7 @@
     include_once('lib/header.php');
     require_once('functions/session.php'); 
     acl_redirect();
-    require_once('functions/errorHandler.php');
+    require_once('functions/alertHandler.php');
     require_once('functions/form.php');
 
 ?>
@@ -12,7 +12,7 @@
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_login.php">
-                    <?php alert(); ?>
+                    <?php error(); ?>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email"

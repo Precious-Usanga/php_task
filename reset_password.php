@@ -8,7 +8,7 @@
         die();
     }
     
-    require_once('functions/errorHandler.php');
+    require_once('functions/alertHandler.php');
     require_once('functions/form.php');
 ?>
 
@@ -22,11 +22,11 @@
         <div class="card" style="width: 22rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_reset.php">
-                    <?php alert();?>
+                    <?php error();?>
                     <?php if(is_user_loggedIn()) { ?>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" readonly <?php patchValue('email');?>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" readonly <?php echo "value=" . $_SESSION['email'] ;?>
                             >
                             <?php formActionError('reset_error', 'email_error'); ?>
                         </div>

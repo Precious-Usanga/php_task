@@ -1,5 +1,6 @@
 <?php 
     require_once('functions/form.php');
+    require_once('functions/alertHandler.php');
 
     function is_user_loggedIn(){
         if(isset($_SESSION['loggedIn']) && !empty($_SESSION['loggedIn'])){
@@ -20,8 +21,9 @@
         $error = $form['error'];
         $data = $form['data'];
         $formData = $form['formData'];
+
         if (!empty($error)) {
-            $_SESSION['register_error'] = $error;
+            set_form_alert("register_error", $error);
             $_SESSION['formData'] = $data;
             if(isset($_SESSION['loggedIn'])){
                 header("Location: dashboard.php");
@@ -47,7 +49,7 @@
             // print_r($postData); exit;
             for($i = 0; $i < count($all_users); $i++){
                 if($postData['email'].'.json' == $all_users[$i]) {
-                    $_SESSION['error'] = "User Email already exist.";
+                    set_alert("error", "User Email already exist.");
                     $_SESSION['formData'] = $data;
                     header("Location: register.php");
                     die();
@@ -55,10 +57,10 @@
             };
             file_put_contents('db/users/'.$postData['email'].'.json', json_encode($postData, JSON_PRETTY_PRINT));
             if(is_user_loggedIn()){
-                $_SESSION['success'] = "New User Created";
+                set_alert("success", "New User Created");
                 header("Location: dashboard.php");
             } else {
-                $_SESSION['success'] = "Registration Successful! Please Login";
+                set_alert("success", "Registration Successful! Please Login");
                 header("Location: login.php");
             }
         }
@@ -71,7 +73,7 @@
         $formData = $form['formData'];
 
         if (!empty($error)){
-            $_SESSION['login_error'] = $error;
+            set_form_alert("login_error", $error);
             $_SESSION['formData'] = $data;
             header("Location: login.php");
             die();
@@ -102,14 +104,14 @@
                         }
                         die();
                     } else {
-                        $_SESSION['error'] = "Invalid username or password";
+                        set_alert("error", "Invalid username or password");
                         $_SESSION['formData'] = $data;
                         header("Location: login.php");
                         die();
                     }
                 }
             };
-            $_SESSION['error'] = "User doesn't exist";
+            set_alert("error", "User doesn't exist");
             $_SESSION['formData'] = $data;
             header("Location: login.php");
             exit;
@@ -123,7 +125,7 @@
         $formData = $form['formData'];
 
         if (!empty($error)) {
-            $_SESSION['forgot_error'] = $error;
+            set_form_alert("forgot_error", $error);
             $_SESSION['formData'] = $data;
             header("Location: forgot_password.php");
             die();
@@ -157,23 +159,23 @@
                         // send mail
                         $try = mail($to,$subject,wordwrap($message, 70),$headers);
                         if($try){
-                            $_SESSION['success'] = "Password reset link sent to " .$formData['email'] ;
+                            set_alert("success", "Password reset link sent to " .$formData['email']);
                             header("Location: login.php");
                         } else{
-                            $_SESSION['error'] = "Sorry, an error occured. Password reset link not sent to " .$formData['email'] ;
+                            set_alert("error", "Sorry, an error occured. Password reset link not sent to " .$formData['email']);
                             $_SESSION['formData'] = $data;
                             header("Location: forgot_password.php");
                         }
                         die();
                     } else {
-                        $_SESSION['error'] = "User Doesn't exist";
+                        set_alert("error", "User Doesn't exist");
                         $_SESSION['formData'] = $data;
                         header("Location: forgot_password.php");
                         die();
                     }
                 }
             };
-            $_SESSION['error'] = "User doesn't exist";
+            set_alert("error", "User Doesn't exist");
             $_SESSION['formData'] = $data;
             header("Location: forgot_password.php");
             exit;
@@ -188,7 +190,7 @@
         $formData = $form['formData'];
 
         if (!empty($error)) {
-            $_SESSION['reset_error'] = $error;
+            set_form_alert("reset_error", $error);
             $_SESSION['formData'] = $data;
             header("Location: reset_password.php");
             die();
@@ -227,17 +229,17 @@
                         unlink('db/tokens/'.$formData['email'].'.json');
                         
                         // display success message and redirect to login
-                        $_SESSION['success'] = "Password reset successful. Please Login.";
+                        set_alert("success", "Password reset successful. Please Login.");
                         header("Location: login.php");
                         // die();
                     } else {
-                        $_SESSION['error'] = "Password reset failed. Invalid token or email.";
+                        set_alert("error", "Password reset failed. Invalid token or email.");
                         header("Location: login.php");
                         die();
                     }
                 }
             }
-            $_SESSION['error'] = "Password reset failed. Invalid token or email.";
+            set_alert("error", "Password reset failed. Invalid token or email.");
             header("Location: login.php");
             die();
         }
@@ -250,7 +252,7 @@
         $formData = $form['formData'];
 
         if (!empty($error)) {
-            $_SESSION['reset_error'] = $error;
+            set_form_alert("reset_error", $error);
             $_SESSION['formData'] = $data;
             header("Location: reset_password.php");
             die();
@@ -270,7 +272,7 @@
                         // delete old user file
                         unlink('db/users/'.$all_users[$i]); 
                     } else {
-                        $_SESSION['error'] = "Invalid Old Password.";
+                        set_alert("error", "Invalid Old Password.");
                         $_SESSION['formData'] = $data;
                         header("Location: reset_password.php");
                         die();
@@ -288,7 +290,7 @@
             $send = mail($to,$subject,wordwrap($message, 70),$headers);
                         
             // display success message and redirect to login
-            $_SESSION['success'] = "Password reset successful.";
+            set_alert("success", "Password reset successful.");
             if($_SESSION['role'] === 'patient') {
                 header("Location: patients_dashboard.php");
             } elseif ($_SESSION['role'] === 'medical_team') {
