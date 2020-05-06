@@ -15,8 +15,7 @@
 </head>
 <body>
 
-    <?php error(); ?>
-    <?php success(); ?>
+    <?php //alert(); ?>
     <h1>STAFF DASHBOARD</h1>
     <p>Welcome! <?php echo $_SESSION['fullname'] . " " ."You're logged in as ".$_SESSION['role'].". Your Id is ".$_SESSION['loggedIn'] ?></p>
     <div class="card" style="width: 18rem;">

@@ -1,7 +1,7 @@
 <?php 
         include_once('lib/header.php');
         require_once('functions/session.php'); 
-        is_logged_in();
+        acl_redirect();
         require_once('functions/form.php');
         require_once('functions/alertHandler.php');
         
@@ -12,7 +12,7 @@
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_register.php">
-                    <?php error(); session_destroy();?>
+                    <?php alert();?>
                     <div class="form-group">
                         <label for="first_name">First Name</label>
                         <input type="text" class="form-control" id="first_name" name="first_name"

@@ -7,11 +7,15 @@
         }
     }
 
-    function error() {
-        if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
-            echo "<div class='alert alert-warning' role='alert'>" .$_SESSION['error'] . "</div>";
-        //    session_destroy();
+    function alert() {
+        $type = ["message", "success", "error"];
+        $class = ["alert-info", "alert-success", "alert-warning"];
+        for($i = 0; $i < count($type); $i++){
+            if(isset($_SESSION[$type[$i]]) && !empty($_SESSION[$type[$i]])){
+                    echo "<div class='alert ".$class[$i]."' role='alert'>" .$_SESSION[$type[$i]] . "</div>";
+            }
         }
+        session_destroy();
     }
 
     function formActionError($actionError, $errorField) {
@@ -29,8 +33,11 @@
             case "error":
                 $_SESSION['error']=$content;
             break;
+            case "message":
+                $_SESSION['error']=$content;
+            break;
             default:
-            $_SESSION['success']=$content;
+            $_SESSION['message']=$content;
         break;
         }
     }

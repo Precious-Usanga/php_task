@@ -20,7 +20,7 @@
                     $firstname_error = 'Firstname cannot be less than 2 letters';
                     $error['firstname_error'] = $firstname_error;
                 } elseif(!ctype_alpha($data['first_name'])){
-                    $firstname_error = 'Firstname cannot contain numbers';
+                    $firstname_error = 'Firstname cannot contain special characters or numbers';
                     $error['firstname_error'] = $firstname_error;
                 } else {
                     $formData['first_name'] = $data['first_name'];
@@ -35,7 +35,7 @@
                     $lastname_error = 'Lastname cannot be less than 2 letters';
                     $error['lastname_error'] = $lastname_error;
                 } elseif(!ctype_alpha($data['last_name'])){
-                    $lastname_error = 'Lastname cannot contain numbers';
+                    $lastname_error = 'Lastname cannot contain special characters or numbers';
                     $error['lastname_error'] = $lastname_error;
                 } else {
                     $formData['last_name']  = $data['last_name'];

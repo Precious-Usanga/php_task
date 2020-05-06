@@ -7,12 +7,12 @@
 
 ?>
 
-    <?php success(); session_destroy();?>
+
     <div class="container">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_login.php">
-                    <?php error(); ?>
+                    <?php alert(); ?>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email"

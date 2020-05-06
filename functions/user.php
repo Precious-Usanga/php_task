@@ -16,6 +16,37 @@
         return false;
     }
 
+    function find_user($email){
+        $all_users = scandir('db/users');
+        for($i = 0; $i < count($all_users); $i++){
+            if($email.'.json' == $all_users[$i]){
+                $userFile = file_get_contents('db/users/'.$all_users[$i]);
+                $userData = json_decode($userFile);
+                return $userData;
+                die();
+            }
+        };
+        return false;
+    }
+
+    function set_user_data($userData){
+        $_SESSION['loggedIn'] = $userData->id;
+        $_SESSION['email'] = $userData->email; 
+        $_SESSION['fullname'] = $userData->first_name. " " .$userData->last_name;
+        $_SESSION['role'] = $userData->designation;
+        $_SESSION['department'] = $userData->department;
+        $_SESSION['dateOfReg'] = $userData->dateOfReg;
+        $_SESSION['lastLogin'] = $userData->lastLogin;
+    }
+
+    function update_user($email, $data){
+        $result = find_user($email);
+        if(isset($result) && $result->email == $email){
+            file_put_contents('db/users/'.$email.'.json', json_encode($data, JSON_PRETTY_PRINT));
+            return 'user updated';
+        }
+    }
+
     function registerUser($formMethod){
         $form = validateForm($formMethod);
         $error = $form['error'];
@@ -32,30 +63,29 @@
             }
             die();
         } else {
-            $all_users = scandir('db/users');
-            // print_r($all_users);
-            $new_user_id = count($all_users) - 2;
-            $postData = [
-                'id' => ++$new_user_id,
-                'first_name'=> $formData['first_name'],
-                'last_name'=> $formData['last_name'],
-                'email'=> $formData['email'],
-                'password'=> password_hash($formData['password'], PASSWORD_DEFAULT),
-                'designation'=> $formData['designation'],
-                'gender'=> $formData['gender'],
-                'department'=> $formData['department'],
-                'dateOfReg'=> date('m/d/Y h:i:s a', time())
-            ];
-            // print_r($postData); exit;
-            for($i = 0; $i < count($all_users); $i++){
-                if($postData['email'].'.json' == $all_users[$i]) {
-                    set_alert("error", "User Email already exist.");
-                    $_SESSION['formData'] = $data;
-                    header("Location: register.php");
-                    die();
-                }
-            };
-            file_put_contents('db/users/'.$postData['email'].'.json', json_encode($postData, JSON_PRETTY_PRINT));
+            $userExist = find_user($formData['email']);
+            if(!$userExist){
+                $all_users = scandir('db/users');
+                $new_user_id = count($all_users) - 2;
+                $postData = [
+                    'id' => ++$new_user_id,
+                    'first_name'=> $formData['first_name'],
+                    'last_name'=> $formData['last_name'],
+                    'email'=> $formData['email'],
+                    'password'=> password_hash($formData['password'], PASSWORD_DEFAULT),
+                    'designation'=> $formData['designation'],
+                    'gender'=> $formData['gender'],
+                    'department'=> $formData['department'],
+                    'dateOfReg'=> date('m/d/Y h:i:s a', time())
+                ];
+                file_put_contents('db/users/'.$postData['email'].'.json', json_encode($postData, JSON_PRETTY_PRINT));
+            } else {
+                set_alert("error", "User Email already exist.");
+                $_SESSION['formData'] = $data;
+                header("Location: register.php");
+                die();
+            }
+            
             if(is_user_loggedIn()){
                 set_alert("success", "New User Created");
                 header("Location: dashboard.php");
@@ -78,43 +108,32 @@
             header("Location: login.php");
             die();
         } else {
-            $all_users = scandir('db/users');
-    
-            for($i = 0; $i < count($all_users); $i++){
-                if($formData['email'].'.json' == $all_users[$i]){
-                    $userFile = file_get_contents('db/users/'.$all_users[$i]);
-                    $userData = json_decode($userFile);
-                    $verifypassword = password_verify($formData['password'], $userData->password);
-                    if($verifypassword == true) {
-                        $_SESSION['success'] = "Hello ".$userData->first_name." ".$userData->last_name." You're Logged in successfully";
-                        $_SESSION['loggedIn'] = $userData->id;
-                        $_SESSION['email'] = $userData->email; 
-                        $_SESSION['fullname'] = $userData->first_name. " " .$userData->last_name;
-                        $_SESSION['role'] = $userData->designation;
-                        $_SESSION['department'] = $userData->department;
-                        $_SESSION['dateOfReg'] = $userData->dateOfReg;
-                        $_SESSION['lastLogin'] = $userData->lastLogin;
-                         
-                        if($_SESSION['role'] === 'patient') {
-                            header("Location: patients_dashboard.php");
-                        } elseif ($_SESSION['role'] === 'medical_team') {
-                            header("Location: medic_team_dashboard.php");
-                        } elseif ($_SESSION['role'] === 'admin') {
-                            header("Location: dashboard.php");
-                        }
-                        die();
-                    } else {
-                        set_alert("error", "Invalid username or password");
-                        $_SESSION['formData'] = $data;
-                        header("Location: login.php");
-                        die();
+            $userData = find_user($formData['email']);
+            if(isset($userData) && !empty($userData)){
+                $verifypassword = password_verify($formData['password'], $userData->password);
+                if($verifypassword === true) {
+                    set_alert("success", "Hello ".$userData->first_name." ".$userData->last_name." You're Logged in successfully");
+                    set_user_data($userData);
+                    if($_SESSION['role'] === 'patient') {
+                        header("Location: patients_dashboard.php");
+                    } elseif ($_SESSION['role'] === 'medical_team') {
+                        header("Location: medic_team_dashboard.php");
+                    } elseif ($_SESSION['role'] === 'admin') {
+                        header("Location: dashboard.php");
                     }
+                    die();
+                } else {
+                    set_alert("error", "Invalid username or password");
+                    $_SESSION['formData'] = $data;
+                    header("Location: login.php");
+                    die();
                 }
-            };
-            set_alert("error", "User doesn't exist");
-            $_SESSION['formData'] = $data;
-            header("Location: login.php");
-            exit;
+            } else {
+                set_alert("error", "User doesn't exist");
+                $_SESSION['formData'] = $data;
+                header("Location: login.php");
+                exit;
+            }
         }
     }
 
@@ -130,51 +149,44 @@
             header("Location: forgot_password.php");
             die();
         } else {
-            $all_users = scandir('db/users');
-    
-            for($i = 0; $i < count($all_users); $i++){
-                if($formData['email'].'.json' == $all_users[$i]){
-                    $userFile = file_get_contents('db/users/'.$all_users[$i]);
-                    $userData = json_decode($userFile);
-                    if($formData['email'] === $userData->email) {
-                        // generate token
-                        $token = "";
-                        $alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
-                                     'n','o','p','q','r', 's', 't','u','v','w','x','y','z'];
-                        for($i = 0; $i < 26; $i++) {
-                            $index = mt_rand(0, count($alphabet)-1);
-                            $token .= $alphabet[$index];
-                        } 
-                        
-                        // set email parameters
-                        $to = $formData['email'];
-                        $subject = "Reset Password Link";
-                        $message = "A password reset request was initiated from your account.\n Please ignore if you do not recognize this activity.\n Otherwise, visit: localhost/php_task/reset_password.php?token=".$token;
-                        $headers = "From: no-reply@snh.org";
-                        
-                        // save token to db
-                        $resetToken = [ 'token' => $token];
-                        file_put_contents('db/tokens/'.$formData['email'].'.json', json_encode($resetToken, JSON_PRETTY_PRINT));
-    
-                        // send mail
-                        $try = mail($to,$subject,wordwrap($message, 70),$headers);
-                        if($try){
-                            set_alert("success", "Password reset link sent to " .$formData['email']);
-                            header("Location: login.php");
-                        } else{
-                            set_alert("error", "Sorry, an error occured. Password reset link not sent to " .$formData['email']);
-                            $_SESSION['formData'] = $data;
-                            header("Location: forgot_password.php");
-                        }
-                        die();
-                    } else {
-                        set_alert("error", "User Doesn't exist");
-                        $_SESSION['formData'] = $data;
-                        header("Location: forgot_password.php");
-                        die();
-                    }
+            $userData = find_user($formData['email']);
+            if(isset($userData) && $formData['email'] === $userData->email) {
+                // generate token
+                $token = "";
+                $alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
+                                'n','o','p','q','r', 's', 't','u','v','w','x','y','z'];
+                for($i = 0; $i < 26; $i++) {
+                    $index = mt_rand(0, count($alphabet)-1);
+                    $token .= $alphabet[$index];
+                } 
+                
+                // set email parameters
+                $to = $formData['email'];
+                $subject = "Reset Password Link";
+                $message = "A password reset request was initiated from your account.\n Please ignore if you do not recognize this activity.\n Otherwise, visit: localhost/php_task/reset_password.php?token=".$token;
+                $headers = "From: no-reply@snh.org";
+                
+                // save token to db
+                $resetToken = [ 'token' => $token];
+                file_put_contents('db/tokens/'.$formData['email'].'.json', json_encode($resetToken, JSON_PRETTY_PRINT));
+
+                // send mail
+                $try = mail($to,$subject,wordwrap($message, 70),$headers);
+                if($try){
+                    set_alert("success", "Password reset link sent to " .$formData['email']);
+                    header("Location: login.php");
+                } else{
+                    set_alert("error", "Sorry, an error occured. Password reset link not sent to " .$formData['email']);
+                    $_SESSION['formData'] = $data;
+                    header("Location: forgot_password.php");
                 }
-            };
+                die();
+            } else {
+                set_alert("error", "User Doesn't exist");
+                $_SESSION['formData'] = $data;
+                header("Location: forgot_password.php");
+                die();
+            }
             set_alert("error", "User Doesn't exist");
             $_SESSION['formData'] = $data;
             header("Location: forgot_password.php");

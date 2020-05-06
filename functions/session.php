@@ -29,16 +29,16 @@
 
     function recordLastLogin() {
         if(is_user_loggedIn()) {
-            $all_users = scandir('db/users');
-            for($i = 0; $i < count($all_users); $i++){
-                if($_SESSION['email'].'.json' == $all_users[$i]){
-                    $userFile = file_get_contents('db/users/'.$all_users[$i]);
-                    $userData = json_decode($userFile);
-                    $userData->lastLogin = date('m/d/Y h:i:s a', time());
-                    file_put_contents('db/users/'.$all_users[$i], json_encode($userData, JSON_PRETTY_PRINT));
-                }
+            $userData = find_user($_SESSION['email']);
+            if(isset($userData) && !empty($userData)){
+                $userData->lastLogin = date('m/d/Y h:i:s a', time());
+                update_user($_SESSION['email'], $userData);
+                
+                logout();
+            } else {
+                header("Location: index.php");
+                die();
             }
-            logout();
         }
     }
 
@@ -46,5 +46,6 @@
         session_unset();
         session_destroy();
         header("Location: index.php");
+        die();
     }
 ?>

@@ -22,7 +22,7 @@
         <div class="card" style="width: 22rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_reset.php">
-                    <?php error();?>
+                    <?php alert();?>
                     <?php if(is_user_loggedIn()) { ?>
                         <div class="form-group">
                             <label for="email">Email</label>

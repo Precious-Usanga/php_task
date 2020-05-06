@@ -11,7 +11,7 @@
         <div class="card" style="width: 22rem;">
             <div class="card-body">
                 <form role="form" method="POST" action="process_forgot.php">
-                    <?php error(); session_destroy();?>
+                    <?php alert();?>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email"
