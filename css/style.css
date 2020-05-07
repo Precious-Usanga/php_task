@@ -1,0 +1,39 @@
+main.portlet-clip {
+    height: 100vh;
+    overflow: hidden;
+}
+.section-bg {
+    background-image: url('../img/home_science_slider_img.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 150vh;
+}
+.lead-txt {
+    font-family: 'Source Sans Pro', sans-serif;
+    /* font-family: 'Passion One', cursive; */
+}
+.section-overlay {
+    background-color: rgba(0, 0, 0, .5);
+    height: 150vh;
+}
+.navbar-brand{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.bg-authentication {
+    background-color: #eff2f7 !important;
+}
+.card-header {
+    background: transparent !important;
+}
+.card-footer {
+    background-color: #eff2f7 !important;
+}
+.input-group-text{
+    background-color: transparent !important;
+    border-right: none !important;
+}
+.login-email, .login-password{
+    border-left: none !important;
+}

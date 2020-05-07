@@ -12,7 +12,7 @@
         $class = ["alert-info", "alert-success", "alert-warning"];
         for($i = 0; $i < count($type); $i++){
             if(isset($_SESSION[$type[$i]]) && !empty($_SESSION[$type[$i]])){
-                    echo "<div class='alert ".$class[$i]."' role='alert'>" .$_SESSION[$type[$i]] . "</div>";
+                    echo "<div class='col-12 alert ".$class[$i]."' role='alert'><i class='fa fa-info-circle' aria-hidden='true'></i>" .$_SESSION[$type[$i]] . "</div>";
             }
         }
         session_destroy();
