@@ -37,3 +37,12 @@ main.portlet-clip {
 .login-email, .login-password{
     border-left: none !important;
 }
+
+.dashboard-side-nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* height: 100px !important;
+    width: 300px !important;
+    overflow-y: auto; */
+}
