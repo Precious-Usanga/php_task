@@ -58,15 +58,39 @@
                                                     </div>
                                                     <div class="col-lg-6 col-12 form-group">
                                                         <label for="department">Department</label>
-                                                        <input type="text" class="form-control" id="department" name="department"
-                                                            <?php patchValue('department'); ?>
-                                                            >
-                                                            <?php formActionError('register_error', 'department_error'); ?>
+                                                        <select class="form-control" name="department" id="deparment">
+                                                            <option value="">--Select Dept--</option>
+                                                            <option value="emergency" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['department'] == 'emergency') {echo "selected";}?> >
+                                                                Emergency
+                                                            </option>
+                                                            <option value="icu" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['department'] == 'icu') { echo "selected";}?> >
+                                                                ICU
+                                                            </option>
+                                                            <option value="cardiology" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['department'] == 'cardiology') {echo "selected";}?> >
+                                                                Cardiology
+                                                            </option>
+                                                            <option value="radiology" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['department'] == 'radiology') { echo "selected";}?> >
+                                                                Radiology
+                                                            </option>
+                                                            <option value="neurology" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['department'] == 'neurology') {echo "selected";}?> >
+                                                                Neurology
+                                                            </option>
+                                                            <option value="oncology" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['department'] == 'oncology') { echo "selected";}?> >
+                                                                Oncology
+                                                            </option>
+                                                            <option value="obstetrics" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['department'] == 'obstetrics') {echo "selected";}?> >
+                                                                Obstetrics
+                                                            </option>
+                                                            <option value="gynaecology" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['department'] == 'gynaecology') { echo "selected";}?> >
+                                                                Gynaecology
+                                                            </option>
+                                                        </select>
+                                                        <?php formActionError('register_error', 'department_error'); ?>
                                                     </div>
                                                     <div class="col-lg-6 col-12 form-group">
                                                         <label for="gender">Gender</label>
                                                         <select class="form-control" name="gender" id="gender">
-                                                            <option value="">Select</option>
+                                                            <option value="">--Select Gender--</option>
                                                             <option value="male" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['gender'] == 'male') {echo "selected";}?> >
                                                                 Male
                                                             </option>
@@ -79,7 +103,7 @@
                                                     <div class="col-lg-6 col-12 form-group">
                                                         <label for="designation">Designation</label>
                                                         <select class="form-control" name="designation" id="designation">
-                                                            <option value="">Select</option>
+                                                            <option value="">--Select designation--</option>
                                                             <option value="admin" <?php if(isset($_SESSION['formData']) && $_SESSION['formData']['designation'] == 'admin') {echo "selected";}?> >
                                                                 Admin
                                                             </option>

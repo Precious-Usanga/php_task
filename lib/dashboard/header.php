@@ -15,7 +15,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="index.php">ROLE: <?php echo $_SESSION['role'] ?> <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="index.php">ROLE: <?php echo strtoupper($_SESSION['role']) ?> <span class="sr-only">(current)</span></a>
                             </li>
                             
                             <li class="nav-item dropdown">
@@ -23,8 +23,7 @@
                                     Actions
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" href="#">Change Password</a>
                                     <a class="dropdown-item" href="#">Home</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="logout.php"><i class="fa fa-arrow-left" aria-hidden="true"></i> Logout</a>

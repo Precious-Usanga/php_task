@@ -83,7 +83,7 @@
             }
             if(isset($data['department'])){
                 if($data['department'] === ""){
-                    $department_error = 'Specify Department';
+                    $department_error = 'Select Department';
                     $error['department_error'] = $department_error;
                 } else {
                     $formData['department']  = $data['department'];
